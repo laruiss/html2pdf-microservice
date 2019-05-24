@@ -1,0 +1,19 @@
+{
+  "name": "html2pdf-microservice",
+  "version": "0.0.1",
+  "description": "Microservice REST API that generates PDF",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pdf",
+    "generator",
+    "pandadoc",
+    "rest",
+    "api",
+    "microservice"
+  ],
+  "author": "Stanislas Ormières",
+  "license": "ISC"
+}
