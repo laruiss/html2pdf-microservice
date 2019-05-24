@@ -2,9 +2,9 @@
   "name": "html2pdf-microservice",
   "version": "0.0.1",
   "description": "Microservice REST API that generates PDF",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node boot-dev.js"
   },
   "keywords": [
     "pdf",
