@@ -1,0 +1,22 @@
+# production mode
+version: '3.5'
+services:
+  html2pdf:
+    image: html-to-pdf-microservice:${APP_VERSION:-latest}
+    container_name: html-to-pdf-microservice
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        http_proxy: ${http_proxy}
+        https_proxy: ${http_proxy}
+        no_proxy: ${no_proxy}
+        npm_registry: ${NPM_REGISTRY}
+        NPM_AUDIT_DRY_RUN: ${NPM_AUDIT_DRY_RUN}
+        APP_VERSION: ${APP_VERSION}
+    ports:
+      - "${API_PORT:-7000}:7000"
+#    env_file:
+#      - ${cnf:-.env}
+    environment:
+      NODE_ENV: production
