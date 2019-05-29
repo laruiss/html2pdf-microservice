@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "79512138-afc9-454f-9838-4f9d7766acb7",
+		"name": "PDF generator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Generate pdf",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/pdf",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"filename\": \"jcvd.pdf\",\n\t\"html\": \"<!DOCTYPE html><html><body><h1>Hello World!</h1><p>You see, même si on frime comme on appelle ça en France... il faut toute la splendeur du aware car l'aboutissement de l'instinct, c'est l'amour ! C'est cette année que j'ai eu la révélation !</p></body></html>\"\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}:{{PORT}}/{{API_PREFIX}}/html2pdf",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"{{API_PREFIX}}",
+						"html2pdf"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
