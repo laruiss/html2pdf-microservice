@@ -17,7 +17,6 @@
   "keywords": [
     "pdf",
     "generator",
-    "pandadoc",
     "rest",
     "api",
     "microservice"
@@ -29,7 +28,9 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.0",
     "express-fileupload": "^1.1.4",
-    "puppeteer": "^1.17.0"
+    "morgan": "^1.9.1",
+    "puppeteer": "^1.17.0",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
