@@ -2,6 +2,7 @@ import puppeteer from 'puppeteer'
 
 const executablePath = process.env.PUPPETEER_EXECUTABLE_PATH
 
+const killBrowserTimeout = process.env.KILL_BROWSER_TIMEOUT_ID || 5000
 let browser
 let killBrowserTimeoutId
 
@@ -20,7 +21,7 @@ export default async () => {
   if (killBrowserTimeoutId) {
     clearTimeout(killBrowserTimeoutId)
   }
-  killBrowserTimeoutId = setTimeout(closeBrowser, 5000)
+  killBrowserTimeoutId = setTimeout(closeBrowser, killBrowserTimeout)
   return browser
 }
 
