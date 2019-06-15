@@ -20,3 +20,5 @@ services:
 #      - ${cnf:-.env}
     environment:
       NODE_ENV: production
+      KILL_BROWSER_TIMEOUT: ${KILL_BROWSER_TIMEOUT:-5000}
+      PORT: ${PORT:-7000}
