@@ -1,4 +1,4 @@
-import convertToPdf from './convert-to-pdf'
+import { getPdf } from './convert-to-pdf'
 
 const html = `<html>
     <head>
@@ -16,7 +16,15 @@ const html = `<html>
 
 describe('convert-to-pdf', () => {
   it('Should convert to pdf', async () => {
-    const pdfBuffer = await convertToPdf(html)
+    const pdfBuffer = await getPdf({ html })
+    const pdfString = pdfBuffer.toString()
+
+    expect(pdfString).toContain('PDF')
+  })
+
+  it('Should convert to pdf', async () => {
+    const url = 'https://www.duckduckgo.com'
+    const pdfBuffer = await getPdf({ url })
     const pdfString = pdfBuffer.toString()
 
     expect(pdfString).toContain('PDF')

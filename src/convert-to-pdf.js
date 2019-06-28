@@ -1,18 +1,36 @@
 
 import getBrowser from './get-browser'
 
-export default async function convertToPdf (html) {
+const getPage = async () => {
+  const browser = await getBrowser()
+  const page = await browser.newPage()
+  return page
+}
+
+const getPdfFromPage = (page) => {
+  return page.pdf({
+    format: 'A4',
+    printBackground: true,
+  })
+}
+
+const convertHtmlToPdf = async (content, method) => {
   try {
-    const browser = await getBrowser()
-    const page = await browser.newPage()
-    await page.setContent(html)
-    const buffer = await page.pdf({
-      format: 'A4',
-      printBackground: true,
-    })
+    const page = await getPage()
+    await page[method](content)
+    const buffer = await getPdfFromPage(page)
     return buffer
   } catch (error) {
     console.error(error)
     return ''
+  }
+}
+
+export const getPdf = ({ url, html }) => {
+  if (html) {
+    return convertHtmlToPdf(html, 'setContent')
+  }
+  if (url) {
+    return convertHtmlToPdf(url, 'goto')
   }
 }

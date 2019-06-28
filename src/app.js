@@ -6,7 +6,7 @@ import morgan from 'morgan'
 import { loggerStream } from './util/logger'
 import npmVersion from '../package.json'
 import mime from 'mime'
-import convertToPdf from './convert-to-pdf'
+import { getPdf } from './convert-to-pdf'
 
 const app = express()
 app.disable('x-powered-by')
@@ -30,9 +30,9 @@ app.use(bodyParser.urlencoded({ limit: contentLimit, extended: false }))
 app.use(fileupload({ limits: { fileSize: fileSizeLimit } }))
 
 app.post(`${apiPrefix}/html2pdf`, async (req, res) => {
-  const { html, filename } = req.body
+  const { filename, html, url } = req.body
   try {
-    const buffer = await convertToPdf(html)
+    const buffer = await getPdf({ url, html })
 
     const mimetype = mime.lookup(filename)
     res.set({
