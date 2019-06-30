@@ -1,11 +1,11 @@
 import express from 'express'
+import morgan from 'morgan'
+import mime from 'mime'
 import bodyParser from 'body-parser'
 import fileupload from 'express-fileupload'
-import morgan from 'morgan'
 
 import { loggerStream } from './util/logger'
 import npmVersion from '../package.json'
-import mime from 'mime'
 import { getPdf } from './convert-to-pdf'
 
 const app = express()
