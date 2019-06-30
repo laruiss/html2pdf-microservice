@@ -26,11 +26,14 @@ const convertHtmlToPdf = async (content, method) => {
   }
 }
 
-export const getPdf = ({ url, html }) => {
+export const getPdf = async ({ file, html, url }) => {
   if (html) {
     return convertHtmlToPdf(html, 'setContent')
   }
   if (url) {
     return convertHtmlToPdf(url, 'goto')
+  }
+  if (file) {
+    return convertHtmlToPdf(file.toString(), 'setContent')
   }
 }
