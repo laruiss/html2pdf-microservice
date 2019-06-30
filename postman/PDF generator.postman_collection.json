@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Generate pdf",
+			"name": "Generate pdf from given html",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -24,7 +24,90 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"filename\": \"jcvd.pdf\",\n\t\"html\": \"<!DOCTYPE html><html><body><h1>Hello World!</h1><p>You see, même si on frime comme on appelle ça en France... il faut toute la splendeur du aware car l'aboutissement de l'instinct, c'est l'amour ! C'est cette année que j'ai eu la révélation !</p></body></html>\"\n}"
+					"raw": "{\n\t\"filename\": \"jcvd.pdf\",\n\t\"html\": \"<!DOCTYPE html><html><head><style>h1 {color: #090;}</style></head><body><h1>Hello World!</h1><p>You see, il faut toute la splendeur du aware car l'aboutissement de l'instinct, c'est l'amour ! C'est cette année que j'ai eu la révélation !</p></body></html>\"\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}:{{PORT}}/{{API_PREFIX}}/html2pdf",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"{{API_PREFIX}}",
+						"html2pdf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate pdf from given file",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/pdf"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": ""
+						},
+						{
+							"key": "filename",
+							"value": "JCVD.pdf",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{HOST}}:{{PORT}}/{{API_PREFIX}}/html2pdf",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"{{API_PREFIX}}",
+						"html2pdf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate pdf from given URL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/pdf"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"filename\": \"duckduckgo.pdf\",\n\t\"url\": \"https://www.duckduckgo.com\"\n}"
 				},
 				"url": {
 					"raw": "http://{{HOST}}:{{PORT}}/{{API_PREFIX}}/html2pdf",

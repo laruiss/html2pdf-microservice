@@ -30,20 +30,37 @@ app.use(bodyParser.urlencoded({ limit: contentLimit, extended: false }))
 app.use(fileupload({ limits: { fileSize: fileSizeLimit } }))
 
 app.post(`${apiPrefix}/html2pdf`, async (req, res) => {
-  const { filename, html, url } = req.body
   try {
-    const buffer = await getPdf({ url, html })
+    const { filename, html, url } = req.body
+    const file = req.files && req.files.file
+
+    if (!filename) {
+      res.status(400).json({
+        error: 'Parameter "filename" must be specified',
+      })
+    }
+
+    const options = {
+      file,
+      html,
+      url,
+    }
+
+    const buffer = await getPdf(options)
 
     const mimetype = mime.lookup(filename)
-    res.set({
-      'Content-Type': mimetype,
-      'Content-Disposition': `attachment; filename="${filename}"`,
-    })
-    res.send(buffer)
+    res
+      .set({
+        'Content-Type': mimetype,
+        'Content-Disposition': `attachment; filename="${filename}"`,
+      })
+      .send(buffer)
   } catch (error) {
-    res.status(error.httpStatusCode || 500).json({
-      error: error.message,
-    })
+    res
+      .status(error.httpStatusCode || 500)
+      .json({
+        error: error.message,
+      })
   }
 })
 
