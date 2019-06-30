@@ -14,9 +14,22 @@ export const closeBrowser = async () => {
   }
 }
 
+export const cleanExit = async () => {
+  try {
+    closeBrowser()
+    process.exit(0)
+  } catch (error) {
+    process.exit(1)
+  }
+}
+
 export default async () => {
   if (!browser) {
-    browser = await puppeteer.launch({ executablePath, headless: true, args: ['--no-sandbox'] })
+    browser = await puppeteer.launch({
+      executablePath,
+      headless: true,
+      args: ['--no-sandbox'],
+    })
   }
   if (killBrowserTimeoutId) {
     clearTimeout(killBrowserTimeoutId)
@@ -28,14 +41,14 @@ export default async () => {
 process.on('beforeExit', closeBrowser)
 
 // do something when app is closing
-process.on('exit', closeBrowser)
+process.on('exit', cleanExit)
 
 // catches ctrl+c event
-process.on('SIGINT', closeBrowser)
+process.on('SIGINT', cleanExit)
 
 // catches "kill pid" (for example: nodemon restart)
-process.on('SIGUSR1', closeBrowser)
-process.on('SIGUSR2', closeBrowser)
+process.on('SIGUSR1', cleanExit)
+process.on('SIGUSR2', cleanExit)
 
 // catches uncaught exceptions
-process.on('uncaughtException', closeBrowser)
+process.on('uncaughtException', cleanExit)
