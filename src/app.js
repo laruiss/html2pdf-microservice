@@ -17,7 +17,7 @@ const fileSizeLimit = 50 * 1024 * 1024
 export const apiPrefix = '/api/v1'
 
 const formatAsNginx =
-':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" :response-time'
+  ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" :response-time'
 
 app.use(morgan(formatAsNginx, { stream: loggerStream }))
 
@@ -56,11 +56,9 @@ app.post(`${apiPrefix}/html2pdf`, async (req, res) => {
       })
       .send(buffer)
   } catch (error) {
-    res
-      .status(error.httpStatusCode || 500)
-      .json({
-        error: error.message,
-      })
+    res.status(error.httpStatusCode || 500).json({
+      error: error.message,
+    })
   }
 })
 

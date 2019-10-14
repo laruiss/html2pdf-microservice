@@ -1,4 +1,3 @@
-
 import getBrowser from './get-browser'
 
 const getPage = async () => {
@@ -7,7 +6,7 @@ const getPage = async () => {
   return page
 }
 
-const getPdfFromPage = (page) => {
+const getPdfFromPage = page => {
   return page.pdf({
     format: 'A4',
     printBackground: true,
